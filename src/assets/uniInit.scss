@@ -1,0 +1,14 @@
+/////////////////////////////////////////////////
+// basic bootstrap
+@import "node_modules/bootstrap/scss/bootstrap";
+
+// General startig css
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+html {
+  scroll-behavior: smooth;
+}
+//////////////////////////////////////////////////

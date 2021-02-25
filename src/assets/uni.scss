@@ -1,0 +1,32 @@
+// testing box model
+* {
+    // outline: dotted thin black;
+  }
+  
+  @import "./uniInit.scss";
+//   @import "./uniFonts.scss";
+//   @import "./uniTheme.scss";
+
+
+
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+  //
+
+//   Extend css from bootstrap
+.navbar {
+    @extend .container;
+  }
+  
+  // general css
+  
+  section {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    min-height: 100px;
+  }
