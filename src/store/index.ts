@@ -9,6 +9,7 @@ export default createStore({
     currentPost: '',
     authors: '',
     currentAuthor: '',
+    photos: ''
   },
   mutations: {},
   actions: {},

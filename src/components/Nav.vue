@@ -1,7 +1,12 @@
 <template lang="pug">
-#Template
-  section
-    .container
+#Nav
+  nav.navbar.navbar-expand-sm.navbar-dark.bg-dark
+    .nav-bar
+      router-link(:to='{name: "Home"}') 
+        span.brand Test'o Blog
+      router-link(:to='{name: "Create"}').fas.fa-plus.brand
+      //- i.fas.fa-chess-knight(@click='changeTheme')
+      //- i.fas.fa-bars(@click='')
     
 </template>
 
@@ -49,8 +54,20 @@ export default ({
 <style lang="scss">
 // uni scss is imported globaly, but for use of variables uniTheme.scss is imported every time lsdjf lsdkjf lskdjf lskdjf lskdjf lskdj flksdj flksdj flksdj fl
 // @import 'x../assets/uniTheme.scss'
-// #Template{
-//    section{}
-// }
+#Nav{
+  nav{
+
+    a{
+      &:hover{text-decoration: none;}
+    }
+  }
+   
+  .brand{
+    font-size: 25px;
+    font-weight: bold;
+    color: white;
+    &:hover{ transform: scale(1.2); transition: .2s; color: rgb(255, 94, 94)}
+  }
+}
 
 </style>

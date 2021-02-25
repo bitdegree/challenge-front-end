@@ -1,12 +1,19 @@
 <template lang="pug">
+
 #Post
   section
     .container
-      router-link(:to="{name: 'Edit', params: {slug: $route.params.slug}}").btn.btn-secondary edit
-      p(v-if="ss.currentAuthor")  #[strong author name: ] {{ ss.currentAuthor[0].username}}
-      p(v-if="ss.currentPost")  #[strong user id: ] {{ ss.currentPost[0].userId }}
-      h2(v-if="ss.currentPost") {{ ss.currentPost[0].title }}
-      p(v-if="ss.currentPost") {{ ss.currentPost[0].body }}
+      .post
+        .profile-box.d-flex
+          .right.d-flex
+            img.profile( src="https://picsum.photos/200/300" )
+            .text.d-flex
+              span.author-name(v-if="ss.currentAuthor")  {{ ss.currentAuthor[0].username}}
+              span.small(v-if="ss.currentAuthor")  {{ ss.currentAuthor[0].address.city}}
+          router-link(:to="{name: 'Edit', params: {slug: $route.params.slug}}").btn.btn-secondary Edit
+        h2(v-if="ss.currentPost") {{ ss.currentPost[0].title }}
+        p(v-if="ss.currentPost") {{ ss.currentPost[0].body }}
+
   section 
     .container
       .comments
@@ -16,8 +23,23 @@
             input.form-control( placeholder='your thoughts go here' v-model="message")
           button.btn.btn-primary(type='submit' @click.prevent="sendComment(message)") Comment
 
-        ul
-          li(v-for="comment in ss.comments.data") {{comment.body}}
+        .d-flex.justify-content-center.row
+          .d-flex.flex-column.col-md-8
+            .coment-bottom.bg-white.p-2.px-4
+              
+              .commented-section.mt-2(v-for="comment in ss.comments.data")
+                .d-flex.flex-row.align-items-center.commented-user
+                  h5.mr-2 {{comment.email}}
+                .comment-text-sm
+                  span {{comment.body}}
+                .reply-section
+                  .d-flex.flex-row.align-items-center.voting-icons
+                    i.fa.fa-sort-up.fa-2x.mt-3.hit-voting
+                    i.fa.fa-sort-down.fa-2x.mb-3.hit-voting
+                    span.ml-2 10
+                  hr
+        
+
 </template>
 
 //
@@ -45,7 +67,7 @@ export default ({
   setup(){
     const ss = useStore().state;
     const route = useRoute();
-    const {getData, getAuthors, getComments, sendComment} = useData();
+    const {getData, getAuthors, getComments, sendComment, getPhotos} = useData();
     const axios = require('axios').default;
     ///////////////////////
 
@@ -105,8 +127,38 @@ export default ({
 <style lang="scss">
 // uni scss is imported globaly, but for use of variables uniTheme.scss is imported every time lsdjf lsdkjf lskdjf lskdjf lskdjf lskdj flksdj flksdj flksdj fl
 // @import 'x../assets/uniTheme.scss'
-// #Template{
-//    section{}
-// }
+#Post{ 
+  .container{
+    padding: .2rem;
+  }
+  .post{
+    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    padding: .5rem;
+    border-radius: 4px;
+  }
+  .profile-box{
+    justify-content: space-between;
+    align-content: center;
+    padding: .3rem;
+  }
+   img.profile{
+     width: 40px;
+     height: 40px;
+     border-radius: 50%;
+   }
+   .right{
+     .text{
+       flex-direction: column;
+       margin-left: .5rem;
+     }
+   }
+   .author-name{
+     margin: 0 0rem;
+     
+     font-size: 16px;
+     font-weight: bold;
+     
+   }
+}
 
 </style>

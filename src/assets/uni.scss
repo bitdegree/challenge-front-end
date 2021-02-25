@@ -19,8 +19,12 @@
   //
 
 //   Extend css from bootstrap
-.navbar {
+.nav-bar {
     @extend .container;
+  }
+.social-btn{
+    @extend .btn, .btn-primary, .m-2;
+    background: #333;
   }
   
   // general css

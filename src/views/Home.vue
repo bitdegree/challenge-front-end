@@ -3,11 +3,10 @@
   section
     .container
       p.display-3 All Posts
-      p authors
-      li(  v-for="item in ss.authors.data" :key="item.id") {{ item.username }}
-      router-link.post(  v-for="item in ss.response.data" :key="item.id" :to="{name: 'Post', params: {slug: item.id}}" )
-        p #[strong {{ item.title }}]
-        hr
+      //- p authors
+      //- li(  v-for="item in ss.authors.data" :key="item.id") {{ item.username }}
+      .postss(  v-for="item in ss.response.data" :key="item.id"  )
+        router-link(:to="{name: 'Post', params: {slug: item.id}}") #[strong {{ item.title }}]
       
 
 </template>
@@ -75,8 +74,30 @@ export default ({
 <style lang="scss">
 #Home{
   section{
-    .post{
+    .postss{
+
+      // // OUTSIDE
+      margin-bottom: 1rem;
+
+      // // INSIDE
+      padding: 1rem;
+
+      // // styling
+      box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      a{ 
+        color: inherit;
+        &:hover{text-decoration: none;}  
+      }
+      &:hover{
+        box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
+        transition: .5s;
+      }
+      &:active{
+        box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
+      }
+      border-radius: 4px;
       cursor: pointer;
+      // color: red;
     }
   }
 }

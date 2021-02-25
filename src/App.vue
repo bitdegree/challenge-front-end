@@ -1,15 +1,17 @@
 <template lang='pug'>
 #App
-  .container
-    router-link(:to='{name: "Home"}') Home
-    a  | 
-    router-link(:to='{name: "Create"}') Create new post
-
-  router-view 
+  .wrapper
+    Nav
+    router-view 
+  Footer
 </template>
 
 <script>
+import Nav from "@/components/Nav.vue";
+import Footer from "@/components/Footer.vue";
+
 export default {
+  components: { Nav, Footer },
   setup(){
 
     return{}
@@ -19,6 +21,9 @@ export default {
 
 <style lang="scss">
 
-
+#App{}
+.wrapper{
+  min-height: 95vh;
+}
 
 </style>

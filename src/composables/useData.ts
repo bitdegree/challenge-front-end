@@ -40,6 +40,17 @@ const getComments = (urlEnding, action = function(response){console.log('no acti
     .catch(err=>console.log(err))
 }
 
+const getPhotos = (action = function(response){console.log('no action')}) =>{
+  axios
+    .get('https://jsonplaceholder.typicode.com/photos' )
+    .then(response =>{
+
+      action(response)
+
+    })
+    .catch(err=>console.log(err))
+}
+
 const sendComment = (body) =>{
   axios
     .post('https://jsonplaceholder.typicode.com/comments', {body})
@@ -58,7 +69,7 @@ const createPost = (author, title, body) =>{
       body: body
     })
     .then(response =>{
-      
+
       alert(`author: \n ${response.data.author} \n title: \n ${response.data.title} \n body: \n ${response.data.body}`)
 
     })
@@ -69,7 +80,7 @@ const createPost = (author, title, body) =>{
 
 // // all functions exported inside useData() function
 const useData = () =>{
-  return {getData, getAuthors, getComments, sendComment, createPost }
+  return {getData, getAuthors, getComments, sendComment, createPost, getPhotos }
 }
 
 export default useData
