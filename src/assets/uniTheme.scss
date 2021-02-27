@@ -1,0 +1,27 @@
+
+
+
+
+$c-1: rgb(159, 162, 196);
+$dark: rgb(27, 25, 37);
+$white: white;
+
+.theme1{
+  color: $c-1;
+  .post{
+    color: $c-1;
+  }
+  section{
+    background: $dark;
+  }
+}
+
+.theme2{
+  color: $dark;
+  .post{
+    color: $dark;
+  }
+  section{
+    background: $white;
+  }
+}
