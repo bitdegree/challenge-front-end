@@ -1,7 +1,7 @@
 <template lang="pug">
 
 #Post
-  section
+  section.post-sec
     .container
       .post
         .profile-box.d-flex
@@ -13,6 +13,7 @@
           router-link(:to="{name: 'Edit', params: {slug: $route.params.slug}}").btn.btn-secondary Edit
         h2(v-if="ss.currentPost") {{ ss.currentPost[0].title }}
         p(v-if="ss.currentPost") {{ ss.currentPost[0].body }}
+        hr( style="border-top: 2px dashed grey;")
 
   section 
     .container
@@ -32,11 +33,6 @@
                   h5.mr-2 {{comment.email}}
                 .comment-text-sm
                   span {{comment.body}}
-                .reply-section
-                  .d-flex.flex-row.align-items-center.voting-icons
-                    i.fa.fa-sort-up.fa-2x.mt-3.hit-voting
-                    i.fa.fa-sort-down.fa-2x.mb-3.hit-voting
-                    span.ml-2 10
                   hr
         
 
@@ -128,11 +124,14 @@ export default ({
 // uni scss is imported globaly, but for use of variables uniTheme.scss is imported every time lsdjf lsdkjf lskdjf lskdjf lskdjf lskdj flksdj flksdj flksdj fl
 // @import 'x../assets/uniTheme.scss'
 #Post{ 
+  section.post-sec{
+    background: rgb(238, 239, 243);
+  }
   .container{
     padding: .2rem;
   }
   .post{
-    box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
+    // box-shadow: rgba(149, 157, 165, 0.2) 0px 8px 24px;
     padding: .5rem;
     border-radius: 4px;
   }

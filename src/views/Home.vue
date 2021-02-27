@@ -2,11 +2,18 @@
 #Home
   section
     .container
-      p.display-3 All Posts
-      //- p authors
-      //- li(  v-for="item in ss.authors.data" :key="item.id") {{ item.username }}
-      .postss(  v-for="item in ss.response.data" :key="item.id"  )
-        router-link(:to="{name: 'Post', params: {slug: item.id}}") #[strong {{ item.title }}]
+      .box
+        p.display-3.text-center {{myauthor}}
+        .choice
+          select( v-model="myauthor" ).drop-down
+            option( @click.prevent="allList" value="All Posts") All Posts
+            option( v-if="ss.authors" v-for="item in ss.authors.data" :key="item.id" :value="item.username") {{item.username}}
+          button.btn.btn-primary( @click.prevent="run") sort
+      .all-posts
+        router-link.post( :to="{name: 'Post', params: {slug: item.id}}" v-for="item in ss.list" :key="item.id"  )
+          .header
+            p {{ findAuthor(item) }}
+          p.title #[strong {{ item.title }}]
       
 
 </template>
@@ -33,20 +40,57 @@ export default ({
     const route = useRoute();
     const axios = require('axios').default;
     const {getData, getAuthors} = useData();
+    const myauthor = ref('')
     ///////////////////////
 
+
+    const allList = () => {
+      console.log("")
+    }
 
  
 
       // // GET data and store in vuex store
     getData((response)=>{
       ss.response = response;
+      getAuthors((response)=>{
+        ss.authors = response
+        ss.list = ss.response.data
+      })
     })
       // // GET author data and store in vuex store
-    getAuthors((response)=>{
-      ss.authors = response
-    })
+    
+    const run = () =>{
 
+
+        if(myauthor.value != "All Posts" ){
+
+          // // find correct author id
+          ss.filterAuthor = ss.authors.data.filter((author)=>{
+            return author.username == myauthor.value
+          })
+  
+          // // filter by correct author
+          ss.list = ss.response.data.filter((item)=>{
+            return item.userId == ss.filterAuthor[0].id
+            // author.value
+          })
+        }
+        else{
+          ss.list = ss.response.data
+        }
+
+    }
+
+    const findAuthor = (itemId) =>{
+      const thisAuthor = ss.authors.data.filter(author => {
+        return author.id == itemId.userId;
+      })
+      console.log( thisAuthor )
+      return thisAuthor[0].username.toString()
+    }
+
+    
 
 
 
@@ -60,7 +104,7 @@ export default ({
     // });
 
     return{
-      ss
+      ss, myauthor, run, allList, findAuthor
     }
   }
 
@@ -74,18 +118,50 @@ export default ({
 <style lang="scss">
 #Home{
   section{
-    .postss{
+    .all-posts{
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+    
+    .box{
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      flex-flow: row wrap;
+      >*{margin: 0 2rem;}
+      margin-bottom: 3rem;
 
+      .choice{
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        >*{margin: 0 .2rem;}
+      }
+    }
+    .post{
+      @media(min-width: 576px) {
+        width: 45%;
+      }
+      @media(min-width: 992px) {
+        width: 30%;
+      }
+      width: 100%;
+      // display: flex;
+      // flex-flow: row wrap;
+      margin: .5rem .5rem;
       // // OUTSIDE
-      margin-bottom: 1rem;
 
       // // INSIDE
       padding: 1rem;
 
       // // styling
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
+      color: black;
+
+
       a{ 
-        color: inherit;
+        color: black;
         &:hover{text-decoration: none;}  
       }
       &:hover{

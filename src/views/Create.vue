@@ -4,17 +4,12 @@
     .container
       form
         .form-group
-          label() select author
-          select( v-model="author" )
+          select( v-model="author" ).drop-down
             option( v-if="ss.authors" v-for="item in ss.authors.data" :key="item.id" :value="item.username") {{item.username}}
-          br
-          p author {{author}}
-          label(for='') Edit the page
-          input.form-control( v-model="title" ) 
-          p title {{title}}
-          textarea(  v-model="body" @keypress.enter.prevent="createPost")
-          p body {{body}}
-          p {{ $route.params.slug }}
+          input.form-control.title( v-model="title" placeholder="Title" ) 
+          //- p title {{title}}
+          textarea(  v-model="body" @keypress.enter.prevent="createPost" placeholder="Lorem ipsum dolor sit amet, consectetur adipisicing elit. Magni, quidem consequatur aperiam officiis, expedita cum nam cupiditate, impedit eveniet eaque quaerat. Odit ducimus voluptatibus dolor, ab in nisi iste repellat sequi commodi sapiente cumque eum! Optio odio porro commodi repellendus.")
+          //- p body {{body}}
         button.btn.btn-primary(type='submit' @click.prevent="createPost(author, title, body)") Post
     
     
@@ -90,7 +85,11 @@ export default ({
 // uni scss is imported globaly, but for use of variables uniTheme.scss is imported every time lsdjf lsdkjf lskdjf lskdjf lskdjf lskdj flksdj flksdj flksdj fl
 // @import 'x../assets/uniTheme.scss'
 #Create{
+  *:focus {
+    outline: none;
+}
    section{}
+   
 }
 
 </style>

@@ -2,13 +2,13 @@
 #Edit
   section
     .container
+      router-link.fas.fa-arrow-left( :to="{name: 'Post', params: {slug: $route.params.slug}}")
       form
         .form-group
           label(for='exampleInputEmail1') Edit the page
-          input.form-control(  v-model="title.value") 
+          p #[strong Author:] {{ss.currentAuthor[0].name}}
+          input.form-control.title(  v-model="title.value") 
           textarea(  v-model="body.value" @keypress.enter.prevent="handleSubmit")
-          p {{ $route.params.slug }}
-          p {{ ss.currentPost }}
         button.btn.btn-primary(type='submit' @click.prevent="updatePost") Update
     
 </template>

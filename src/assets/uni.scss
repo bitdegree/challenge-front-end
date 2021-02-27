@@ -22,9 +22,15 @@
 .nav-bar {
     @extend .container;
   }
+
+input:focus {
+  outline: none !important;;
+}
 .social-btn{
     @extend .btn, .btn-primary, .m-2;
     background: #333;
+    border-color: white;
+    &:hover{border-color: white;}
   }
   
   // general css
@@ -33,4 +39,38 @@
     padding-top: 50px;
     padding-bottom: 50px;
     min-height: 100px;
+  }
+
+  textarea{
+    margin-top: 1rem;
+    padding: 1rem;
+    width: 100%;
+    min-height: 300px;
+    border:none;
+  }
+
+  .drop-down{
+    margin-bottom: 1rem;
+    background: rgb(204, 204, 204);
+    border-radius: 4px;
+    padding: .2rem;
+    border: none;
+    option{
+      background: white;
+      border: none;
+      font-weight: bold;
+      padding: .5rem;
+    }
+  }
+
+  input.title{
+    border:none;
+    font-size: 30px;
+    font-weight: bold;
+    &:hover{
+      outline: 1px solid red;
+      }
+
+    &:hover{outline: red;}
+    &:focus{ border-color: red !important; outline: 0;}
   }
