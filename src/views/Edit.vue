@@ -6,10 +6,10 @@
       form
         .form-group
           label(for='exampleInputEmail1') Edit the page
-          p #[strong Author:] {{ss.currentAuthor[0].name}}
+          p #[strong Author:] "{{ss.currentAuthor[0].username}}"  {{ss.currentAuthor[0].name}}
           input.form-control.title(  v-model="title.value") 
-          textarea(  v-model="body.value" @keypress.enter.prevent="handleSubmit")
-        button.btn.btn-primary(type='submit' @click.prevent="updatePost") Update
+          textarea(  v-model="body.value" @keypress.enter.prevent="updatePost(title, body, $route.params.slug)")
+        button.btn.btn-primary(type='submit' @click.prevent="updatePost(title, body, $route.params.slug)") Update
     
 </template>
 
@@ -38,38 +38,40 @@ export default ({
     const ss = useStore().state;
     const route = useRoute();
     const axios = require('axios').default;
-    const {getData, getAuthors, getComments, sendComment} = useData();
+    const {getPosts, getAuthors, getComments, sendComment, updatePost} = useData();
     ///////////////////////
 
     // // v-model variables
     const title = ref('')
     const body = ref('')
+
+    // // if the current post has beed defined then change title and body values
     const checkUpdate = () =>{
       if(ss.currentPost){
         title.value = ref(ss.currentPost[0].title)
         body.value = ref(ss.currentPost[0].body)
-        console.log('UUPPPP')
       }
     }
 
     // // after we have the title and body then PUT to url
-    const updatePost = () =>{
-      // console.log(message.value)
-      axios.put('https://jsonplaceholder.typicode.com/posts/' + route.params.slug, {
-        title: title.value,
-        body: body.value
-      }).then(response =>{
-        alert(`title: \n ${response.data.title._rawValue} \n body: \n ${response.data.body._rawValue}`)
-      }).catch(err => {
-        console.log(err)
-      })
-    }
+    // const updatePost = () =>{
+    //   axios.put('https://jsonplaceholder.typicode.com/posts/' + route.params.slug, {
+    //     title: title.value,
+    //     body: body.value
+    //   }).then(response =>{
+    //     alert(`title: \n ${response.data.title._rawValue} \n body: \n ${response.data.body._rawValue}`)
+    //   }).catch(err => {
+    //     console.log(err)
+    //   })
+    // }
+
+
 
     // ss.currentPost = ss.response.data.filter(item => {
     //   return item.id == route.params.slug; 
     // })
-    getData( (response)=>{
-      ss.response = response
+    getPosts( (response)=>{
+      ss.posts = response
 
       // // save current post data
       ss.currentPost = response.data.filter(item => {
@@ -89,9 +91,7 @@ export default ({
     
     
     onUpdated(()=>{
-      console.log('edit updated')
       checkUpdate()
-      console.log(ss.currentPost)
     })
 
 
@@ -104,7 +104,7 @@ export default ({
     // });
     
     return {
-      ss, updatePost, title, body
+      ss, updatePost, title, body, route
     };
   }
 

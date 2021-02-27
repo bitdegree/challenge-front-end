@@ -41,7 +41,7 @@ export default ({
     const ss = useStore().state;
     const route = useRoute();
     const axios = require('axios').default;
-    const {getData, getAuthors, getComments, sendComment, createPost} = useData();
+    const {getPosts, getAuthors, getComments, sendComment, createPost} = useData();
     ///////////////////////
 
     const title = ref('')
@@ -49,8 +49,8 @@ export default ({
     const author = ref('')
 
 
-    getData( (response)=>{
-      ss.response = response
+    getPosts( (response)=>{
+      ss.posts = response
     })
     getAuthors((response)=>{
       ss.authors = response

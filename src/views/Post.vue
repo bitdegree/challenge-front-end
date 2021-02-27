@@ -63,7 +63,7 @@ export default ({
   setup(){
     const ss = useStore().state;
     const route = useRoute();
-    const {getData, getAuthors, getComments, sendComment, getPhotos} = useData();
+    const {getPosts, getAuthors, getComments, sendComment, getPhotos} = useData();
     const axios = require('axios').default;
     ///////////////////////
 
@@ -75,8 +75,8 @@ export default ({
     })
 
 
-    getData( (response)=>{
-      ss.response = response
+    getPosts( (response)=>{
+      ss.posts = response
 
       // // save current post data
       ss.currentPost = response.data.filter(item => {

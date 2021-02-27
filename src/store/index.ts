@@ -4,7 +4,7 @@ export default createStore({
   state: {
     title: '',
     body: '',
-    response: '',
+    posts: '',
     comments: '',
     currentPost: '',
     authors: '',

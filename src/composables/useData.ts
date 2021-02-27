@@ -1,9 +1,10 @@
 
-
+import { useRouter, useRoute } from "vue-router";
+const route = useRoute();
 const axios = require('axios').default;
 
 // // get post data and save to ss.response
-const getData = ( action = function(response){console.log('no action')}) =>{
+const getPosts = ( action = function(response){console.log('no action')}) =>{
   axios
     .get('https://jsonplaceholder.typicode.com/posts')
     .then(response =>{ 
@@ -78,9 +79,25 @@ const createPost = (author, title, body) =>{
 
 
 
+const updatePost = (title, body, urlEnding) =>{
+  axios.put('https://jsonplaceholder.typicode.com/posts/' + urlEnding, {
+    title: title,
+    body: body
+  }).then(response =>{
+    alert(`title: \n ${response.data.title._rawValue} \n body: \n ${response.data.body._rawValue}`)
+  }).catch(err => {
+    console.log(err)
+  })
+}
+
+
+
+
+
+
 // // all functions exported inside useData() function
 const useData = () =>{
-  return {getData, getAuthors, getComments, sendComment, createPost, getPhotos }
+  return {getPosts, getAuthors, getComments, sendComment, createPost, getPhotos, updatePost }
 }
 
 export default useData

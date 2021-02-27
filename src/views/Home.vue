@@ -6,13 +6,13 @@
         p.display-3.text-center {{myauthor}}
         .choice
           select( v-model="myauthor" ).drop-down
-            option( @click.prevent="allList" value="All Posts") All Posts
+            option(  value="All Posts") All Posts
             option( v-if="ss.authors" v-for="item in ss.authors.data" :key="item.id" :value="item.username") {{item.username}}
-          button.btn.btn-primary( @click.prevent="run") sort
+          button.btn.btn-primary( @click.prevent="sort(ss, myauthor)") sort
       .all-posts
         router-link.post( :to="{name: 'Post', params: {slug: item.id}}" v-for="item in ss.list" :key="item.id"  )
           .header
-            p {{ findAuthor(item) }}
+            p {{ findAuthor(item, ss) }}
           p.title #[strong {{ item.title }}]
       
 
@@ -28,6 +28,7 @@ import { useStore } from "vuex";
 import { useRouter, useRoute } from "vue-router";
 import { onMounted,  ref, provide , onUpdated, onUnmounted, onBeforeMount} from "vue";
 import useData from "@/composables/useData";
+import useJs from "@/composables/useJs";
 // import {fire, fireAuth} from '@/firebase/config'
 // import { a, n } from "@/composables/types";
 // import useCss from "@/composables/useCss";
@@ -39,63 +40,55 @@ export default ({
     const ss = useStore().state;
     const route = useRoute();
     const axios = require('axios').default;
-    const {getData, getAuthors} = useData();
+    const { getPosts, getAuthors } = useData();
+    const { sort,findAuthor} = useJs();
     const myauthor = ref('')
     ///////////////////////
 
 
-    const allList = () => {
-      console.log("")
-    }
+ 
+
+      
+    
+    // // default value of my
+    // const sort = (_ss = ss, _myauthor = myauthor.value) =>{
+
+    //     // // if you select a specific author then...
+    //     if(_myauthor != "All Posts" ){
+
+    //       // // find correct author id
+    //       _ss.filterAuthor = _ss.authors.data.filter((author)=>{
+    //         return author.username == _myauthor
+    //       })
+  
+    //       // // filter by correct author
+    //       _ss.list = _ss.posts.data.filter((item)=>{
+    //         return item.userId == _ss.filterAuthor[0].id
+    //       })
+    //     }
+    //     else{
+    //       _ss.list = _ss.posts.data
+    //     }
+
+    // }
 
  
 
-      // // GET data and store in vuex store
-    getData((response)=>{
-      ss.response = response;
+    
+
+    // // GET data and store in vuex store
+    getPosts((response)=>{
+      ss.posts = response;
       getAuthors((response)=>{
         ss.authors = response
-        ss.list = ss.response.data
+        ss.list = ss.posts.data
+        myauthor.value = "All Posts"
       })
     })
-      // // GET author data and store in vuex store
-    
-    const run = () =>{
-
-
-        if(myauthor.value != "All Posts" ){
-
-          // // find correct author id
-          ss.filterAuthor = ss.authors.data.filter((author)=>{
-            return author.username == myauthor.value
-          })
-  
-          // // filter by correct author
-          ss.list = ss.response.data.filter((item)=>{
-            return item.userId == ss.filterAuthor[0].id
-            // author.value
-          })
-        }
-        else{
-          ss.list = ss.response.data
-        }
-
-    }
-
-    const findAuthor = (itemId) =>{
-      const thisAuthor = ss.authors.data.filter(author => {
-        return author.id == itemId.userId;
-      })
-      console.log( thisAuthor )
-      return thisAuthor[0].username.toString()
-    }
-
-    
 
 
 
 
-    ///////////////////////////
     // // js for css
 
 
@@ -104,7 +97,7 @@ export default ({
     // });
 
     return{
-      ss, myauthor, run, allList, findAuthor
+      ss, myauthor, sort, findAuthor
     }
   }
 
@@ -117,6 +110,7 @@ export default ({
 
 <style lang="scss">
 #Home{
+
   section{
     .all-posts{
       display: flex;
@@ -126,9 +120,9 @@ export default ({
     
     .box{
       display: flex;
+      flex-flow: row wrap;
       justify-content: center;
       align-items: center;
-      flex-flow: row wrap;
       >*{margin: 0 2rem;}
       margin-bottom: 3rem;
 
@@ -139,6 +133,7 @@ export default ({
         >*{margin: 0 .2rem;}
       }
     }
+
     .post{
       @media(min-width: 576px) {
         width: 45%;
@@ -147,8 +142,6 @@ export default ({
         width: 30%;
       }
       width: 100%;
-      // display: flex;
-      // flex-flow: row wrap;
       margin: .5rem .5rem;
       // // OUTSIDE
 
@@ -158,21 +151,18 @@ export default ({
       // // styling
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
       color: black;
+      border-radius: 4px;
+      cursor: pointer;
 
-
-      a{ 
-        color: black;
-        &:hover{text-decoration: none;}  
-      }
       &:hover{
         box-shadow: rgba(0, 0, 0, 0.24) 0px 3px 8px;
         transition: .5s;
+        text-decoration: none;
       }
       &:active{
         box-shadow: rgba(50, 50, 93, 0.25) 0px 30px 60px -12px inset, rgba(0, 0, 0, 0.3) 0px 18px 36px -18px inset;
       }
-      border-radius: 4px;
-      cursor: pointer;
+     
       // color: red;
     }
   }
