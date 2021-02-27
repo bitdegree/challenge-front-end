@@ -112,12 +112,7 @@ export default ({
 #Home{
 
   section{
-    .all-posts{
-      display: flex;
-      flex-flow: row wrap;
-      justify-content: center;
-    }
-    
+
     .box{
       display: flex;
       flex-flow: row wrap;
@@ -134,14 +129,21 @@ export default ({
       }
     }
 
+    .all-posts{
+      display: flex;
+      flex-flow: row wrap;
+      justify-content: center;
+    }
+    
+
     .post{
+      width: 100%;
       @media(min-width: 576px) {
         width: 45%;
       }
       @media(min-width: 992px) {
         width: 30%;
       }
-      width: 100%;
       margin: .5rem .5rem;
       // // OUTSIDE
 
@@ -150,7 +152,6 @@ export default ({
 
       // // styling
       box-shadow: rgba(0, 0, 0, 0.16) 0px 1px 4px;
-      color: black;
       border-radius: 4px;
       cursor: pointer;
 

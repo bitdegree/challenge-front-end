@@ -12,7 +12,7 @@
       a.social-btn( target="_blank"  href="https://www.linkedin.com/in/adomas-g-0738b487/" )
         i.fab.fa-linkedin
         
-    .text-center.p-3(  style="background-color: rgba(0, 0, 0, 0.2);") coding is dope
+    .text-center.p-3(  style="background-color: rgba(0, 0, 0, 0.2);" @click.prevent="changeTheme") coding is dope
 </template>
 
 
@@ -21,8 +21,8 @@
 <script lang="ts">
 // Possible reusable functions placed in other files
 import { useStore } from "vuex";
+import { onMounted, ref, provide } from "vue";
 // import {fire, fireAuth} from '@/firebase/config'
-// import { onMounted, ref, provide } from "vue";
 // import { a, n } from "@/composables/types";
 // import useCss from "@/composables/useCss";
 // import { useRouter, useRoute } from "vue-router";
@@ -30,10 +30,10 @@ import { useStore } from "vuex";
 export default ({
 
   setup(){
+
     const ss = useStore().state;
     ///////////////////////
-
-
+    
 
 
 
@@ -42,11 +42,18 @@ export default ({
 
     // // js for css ...
 
-    // js after the page has been mounted 
+    // // js after the page has been mounted 
+    const changeTheme = () =>{
+      const app = document.querySelector("#app")
+      if(app){
+        app.classList.toggle("theme1")
+        app.classList.toggle("theme2")
+      }
+    }
     // onMounted(() => {
     // });
     return {
-      ss
+      ss, changeTheme
     };
   }
 

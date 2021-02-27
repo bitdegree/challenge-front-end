@@ -1,9 +1,8 @@
 <template lang='pug'>
-#App
-  .wrapper
-    Nav
-    router-view 
-  Footer
+.wrapper
+  Nav
+  router-view 
+Footer
 </template>
 
 <script>
