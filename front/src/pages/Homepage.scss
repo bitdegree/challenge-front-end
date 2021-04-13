@@ -1,0 +1,34 @@
+@import '../variables';
+
+.post {
+    padding: 24px;
+    margin: 12px 0;
+
+    h2 {
+        margin-bottom: 12px;
+    }
+
+    p {
+        margin-bottom: 12px;
+
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        line-height: 21px;
+        max-height: 48px;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+    }
+
+    .credits {
+        font-size: 12px;
+        padding: 3px 3px 0 3px;
+
+        border-top: 0.5px solid $primary-color;
+
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+    }
+}
+
