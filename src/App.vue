@@ -7,6 +7,7 @@
 </template>
 
 <style lang="scss">
+$primary: #2c3e50;
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
@@ -14,7 +15,10 @@
   text-align: center;
   color: #2c3e50;
 }
-
+li a {
+  color: $primary;
+  text-decoration: none;
+}
 #nav {
   padding: 30px;
 
