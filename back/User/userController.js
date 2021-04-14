@@ -26,7 +26,7 @@ logIn = async (req, res) => {
 
         await user.save()
 
-        if (confirm) res.header('token', token).json(user.name)
+        if (confirm) res.header('token', token).json({name: user.name, _id: user._id})
         if (!confirm) throw 'wrong email or password'
     } catch (e) {
         res.status(401).json(e)

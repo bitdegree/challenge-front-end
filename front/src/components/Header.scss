@@ -1,4 +1,4 @@
-@import '../variables';
+@import '../utilities/variables';
 
 header {
     position: relative;
@@ -93,6 +93,10 @@ header {
 
 .signout-logo {
     display: none;
+
+    &:hover, &:active {
+        color: $primary-color;
+    }
 }
 
 .create {
@@ -126,5 +130,11 @@ header {
         margin-right: 64px;
         cursor: pointer;
         color: $primary-color;
+        border-bottom: 2px solid rgba(255, 255, 255, 0);
+        transition: border-bottom .1s ease-in-out;
+
+        &:hover, &:active {
+            border-bottom: 2px solid $primary-color;
+        }
     }
 }

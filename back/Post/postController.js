@@ -3,7 +3,7 @@ const Post = require('./Post')
 
 getPosts = async (req, res) => {
     try {
-        const posts = await Post.find().populate('user').populate('comments')
+        const posts = await Post.find().populate('user', 'name').populate('comments')
         if (!posts) throw 'something went wrong'
         res.json(posts)
     } catch (e) {
@@ -13,7 +13,14 @@ getPosts = async (req, res) => {
 
 getPost = async (req, res) => {
     try {
-        const post = await Post.findOne({_id: req.params.id}).populate('user').populate('comments')
+        const post = await Post.findOne({_id: req.params.id}).populate('user', 'name').populate('comments').populate({
+            path: 'comments',
+            populate: {
+                path: 'user',
+                model: 'user',
+                select: 'name'
+            }
+        })
         if (!post) throw 'post not found'
         res.json(post)
     } catch (e) {
@@ -27,7 +34,7 @@ createPost = async (req, res) => {
     try {
         const savedPost = await newPost.save()
         if (!savedPost) throw 'something went wrong'
-        res.json('post saved')
+        res.json(savedPost._id)
     }catch (e) {
         res.status(400).json(e)
     }
@@ -43,7 +50,7 @@ editPost = async (req, res) => {
     try {
         const updatedPost = await Post.findOneAndUpdate(filter, update, {new: true})
         if (!updatedPost) throw 'something went wrong'
-        res.json('post updated')
+        res.json(updatedPost._id)
     } catch (e) {
         res.status(400).json(e)
     }

@@ -11,7 +11,6 @@ import Homepage from './pages/Homepage'
 import Login from './pages/Login'
 import Post from './pages/Post'
 import CreatePost from './pages/CreatePost'
-import EditPost from './pages/EditPost'
 import NoMatch from './pages/NoMatch'
 
 export const userContext = React.createContext(null)
@@ -31,7 +30,7 @@ const App = () => {
           'Content-Type': 'application/json',
           token: token
         }
-      }).then(r => setUser({name: r.data}))
+      }).then(r => setUser({name: r.data.name, _id: r.data._id}))
     }
   }, [])
 
@@ -50,11 +49,11 @@ const App = () => {
             <Route path='/post/:id'>
               <Post />
             </Route>
-            <Route path='/createpost'>
+            <Route exact path='/createpost'>
               <CreatePost />
             </Route>
-            <Route path='/editpost/:id'>
-              <EditPost />
+            <Route exact path='/createpost/:id'>
+              <CreatePost />
             </Route>
             <Route path="*">
               <NoMatch />

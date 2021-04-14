@@ -1,6 +1,6 @@
 import { useContext, useState } from 'react'
 import { userContext } from '../App'
-import { Link } from 'react-router-dom'
+import { Link, useHistory } from 'react-router-dom'
 
 import favicon from '../assets/favicon.ico'
 import { SignOut } from "phosphor-react";
@@ -14,10 +14,17 @@ const Header = () => {
     const [user, setUser] = useContext(userContext)
     const [menuOpen, setMenuOpen] = useState(false)
 
+    const history = useHistory()
+
     const handleLogOut = () => {
         setUser(null)
         setMenuOpen(false)
         localStorage.clear()
+    }
+
+    const handleCreate = () => {
+        setMenuOpen(false)
+        history.push('/createpost')
     }
 
     return (
@@ -37,7 +44,7 @@ const Header = () => {
             </div>}
             <nav style={{transform: menuOpen && 'scaleY(1)'}}>
                 <ul>
-                    <li><Link className='mobile-Link' to='/createpost'>Create post</Link></li>
+                    <li className='mobile-Link' onClick={handleCreate}>Create post</li>
                     <li className='mobile-Link' onClick={handleLogOut}>Log out</li>
                 </ul>
             </nav>

@@ -46,7 +46,7 @@ const Login = () => {
         }).then(r => {
             localStorage.setItem('token', r.headers.token)
             setUser(prev => {
-                return {...prev, name: r.data}
+                return {...prev, name: r.data.name, _id: r.data._id}
             })
             setError('')
             setFormData(emptyForm)
