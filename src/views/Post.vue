@@ -1,15 +1,25 @@
 <template>
-  <div class="container col-lg-12">
+  <div v-if="!$store.getters.loading" class="container col-lg-12">
+    <router-link
+      edit
+      :to="{ path: `/post/${post.id}/edit` }"
+      class="btn btn-primary my-3"
+      >Edit</router-link
+    >
     <div class="post card mx-auto" style="width: 50rem">
       <div class="card-body">
         <h2 class="card-title">{{ post.title }}</h2>
-        <p v-for="i in 10" :key="i" class="card-text">
+        <h3 class="card-subtitle">{{ author.username }}</h3>
+        <p class="card-text">
           {{ post.body }}
         </p>
-        <a href="#" class="btn btn-primary">Go somewhere</a>
       </div>
     </div>
-    <div class="comments card mx-auto mt-5" style="width: 50rem">
+    <div
+      v-if="comments.length > 0"
+      class="comments card mx-auto mt-5"
+      style="width: 50rem"
+    >
       <h2 class="card-title">Comments</h2>
       <ul class="list-group list-group-flush">
         <li
@@ -37,12 +47,14 @@ export default {
     comments() {
       return this.$store.getters.comments;
     },
+    author() {
+      return this.$store.getters.author(this.post.userId);
+    },
   },
-  async created() {
+  created() {
     if (!this.post) {
-      await this.$store.dispatch("fetchPost", this.postId);
+      this.$store.dispatch("fetchPost", this.postId);
     }
-    this.$store.dispatch("fetchComments", this.postId);
   },
 };
 </script>
