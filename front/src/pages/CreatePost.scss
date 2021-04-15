@@ -1,0 +1,60 @@
+@import '../utilities/variables';
+
+.create-post-container {
+    padding: 24px;
+    min-height: calc(100vh - 80px);
+
+    h2 {
+        margin: 48px 0;
+        text-align: center;
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+
+        label {
+            width: 90%;
+            text-align: left;
+            margin: 24px 0 6px 0;
+        }
+
+        input {
+            width: 90%;
+            padding: 12px;
+            font-size: 20px;
+
+            border: 3px solid $primary-color;
+            outline: none;
+
+            transition: box-shadow .2s ease-in-out;
+
+            &:focus {
+                box-shadow: 0 0 6px 0 $primary-color;
+            }
+        }
+
+        textarea {
+            width: 90%;
+            height: 300px;
+            padding: 12px;
+            margin-bottom: 24px;
+            font-size: 16;
+
+            border: 3px solid $primary-color;
+            outline: none;
+            resize: none;
+
+            transition: box-shadow .2s ease-in-out;
+
+            &:focus {
+                box-shadow: 0 0 6px 0 $primary-color;
+            }
+        }
+
+        .create-error {
+            color: red;
+        }
+    }
+}

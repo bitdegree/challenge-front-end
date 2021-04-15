@@ -1,0 +1,64 @@
+@import '../utilities/variables';
+
+.single-post {
+    padding: 24px;
+    max-width: 800px;
+    min-height: calc(100vh - 80px);
+    margin: 0 auto;
+
+    h2 {
+        font-size: 3rem;
+    }
+    
+    p {
+        margin: 12px 0;
+    }
+}
+
+.post-comment-container {
+    width: 100%;
+    display: flex;
+
+    form {
+        width: 100%;
+
+        textarea {
+            width: 100%;
+            height: 100px;
+            margin: 12px auto 8px auto;
+            resize: none;
+            outline: none;
+            padding: 6px;
+            font-size: 14px;
+        }
+    }
+}
+
+.comments-container {
+    width: 100%;
+    display: flex;
+    flex-direction: column-reverse;
+}
+
+.comment {
+    width: 90%;
+    margin: 6px auto;
+    padding: 12px;
+
+    background-color: $light-color;
+    border-radius: 12px;
+    border: 1px solid $secondary-color;
+
+    p {
+        margin: 0;
+    }
+
+    .comment-author {
+        margin-top: 6px;
+        font-size: 12px;
+    }
+}
+
+.comment-error {
+    color: red;
+}

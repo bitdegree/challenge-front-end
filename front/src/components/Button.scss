@@ -1,0 +1,20 @@
+@import '../utilities/variables';
+
+.button {
+    padding: 12px 24px;
+    border: 2px solid $primary-color;
+    outline: none;
+
+    background-color: $light-color;
+    transition: background-color .1s ease-in-out;
+
+    cursor: pointer;
+
+    color: $primary-color;
+    font-size: 1rem;
+
+    &:hover, &:active {
+        background-color: $primary-color;
+        color: $light-color;
+    }
+}
