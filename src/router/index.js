@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory } from "vue-router";
 import Home from "../views/Home.vue";
+import Post from "../views/Post.vue";
 
 const routes = [
   {
@@ -11,6 +12,11 @@ const routes = [
     path: "/about",
     name: "About",
     component: () => import("../views/About.vue"),
+  },
+  {
+    path: "/post/:id",
+    name: "Post",
+    component: Post,
   },
 ];
 
