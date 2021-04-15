@@ -28,12 +28,10 @@ const Post = () => {
             setPost(r.data)
             setLoaded(true)
         })
-    }, [loaded])
+    }, [])
 
     const handleComment = e => {
         e.preventDefault()
-
-        setLoaded(false)
 
         const token = localStorage.getItem('token') || null
 
@@ -52,7 +50,12 @@ const Post = () => {
         }
 
         axios.post('http://localhost:5000/post/comment', data, headers)
-        .then(() => {
+        .then(r => {
+            const comments = post.comments
+            comments.push(r.data)
+            setPost(prev => {
+                return {...prev, comments: comments}
+            })
             setError('')
             setComment('')
         })

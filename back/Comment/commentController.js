@@ -13,13 +13,13 @@ createComment = async (req, res) => {
         comment.user = user._id
         post.comments = [...post.comments, comment._id]
 
-        const savedComment = await comment.save()
+        const savedComment = await comment.save().then(e => e.populate('user', 'name').execPopulate())
         if (!savedComment) throw 'something went wrong'
 
-        const savedPost = await post.save()
+        let savedPost = await post.save()
         if (!savedPost) throw 'something went wrong'
-        
-        res.send('comment success')
+
+        res.json(savedComment)
     } catch (e) {
         res.status(400).json(e)
     }

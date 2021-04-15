@@ -17,12 +17,9 @@ export const userContext = React.createContext(null)
 
 const App = () => {
 
-  const [posts, setPosts] = useState([])
   const [user, setUser] = useState(null)
 
   useEffect(() => {
-    axios.get('http://localhost:5000/posts')
-      .then(r => setPosts(r.data.reverse()))
     const token = localStorage.getItem('token') || null
     if (token) {
       axios.post('http://localhost:5000/user', null, {
@@ -41,7 +38,7 @@ const App = () => {
           <Header />
           <Switch>
             <Route exact path='/'>
-              <Homepage posts={posts}/>
+              <Homepage />
             </Route>
             <Route exact path='/login'>
               <Login />
