@@ -1,12 +1,14 @@
 <template>
   <div class="container">
-    <form>
-      <div v-if="created" class="alert alert-success" role="alert">
-        A simple success alert—check it out!
-      </div>
+    <form class="needs-validation">
       <div class="d-flex flex-column mb-3">
         <label for="authorSelect">Author</label>
-        <select v-model="userId" id="authorSelect" class="custom-select mb-3">
+        <select
+          v-model="userId"
+          id="authorSelect"
+          class="custom-select mb-3"
+          required
+        >
           <option
             v-for="(author, index) in authors"
             :key="index"
@@ -33,9 +35,10 @@
           rows="7"
         ></textarea>
         <button
-          type="button"
+          type="submit"
           class="btn btn-primary w-25 mt-2"
           @click="onSubmit"
+          :disabled="!formValid"
         >
           Submit
         </button>
@@ -62,7 +65,6 @@ export default {
       userId: "",
       title: "",
       body: "",
-      created: false,
     };
   },
   computed: {
@@ -71,6 +73,9 @@ export default {
     },
     post() {
       return this.$store.getters.post(this.id);
+    },
+    formValid() {
+      return this.userId && this.title.length && this.body.length;
     },
   },
   methods: {
