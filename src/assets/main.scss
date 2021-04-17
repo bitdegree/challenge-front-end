@@ -1,5 +1,45 @@
-@import "../../node_modules/bootstrap/scss/functions";
-@import "../../node_modules/bootstrap/scss/variables";
-@import "../../node_modules/bootstrap/scss/mixins";
+@import url("https://fonts.googleapis.com/css2?family=Nunito+Sans:ital,wght@0,400;0,700;1,400&family=Open+Sans:ital,wght@0,400;0,700;1,400&family=Poppins:wght@400;700&display=swap");
+@import url("https://cdn.jsdelivr.net/npm/bootstrap-icons@1.4.1/font/bootstrap-icons.css");
 
-$primary: #2c3e50;
+$primary: #5242e6;
+$secondary: #201b50;
+$gray: #111;
+$body-bg: #f8f9fa;
+
+$theme-colors: (
+  "primary": $primary,
+  "secondary": $secondary,
+  "gray": $gray,
+  "body-bg": $body-bg,
+);
+
+$headings-font: "Nunito Sans", sans-serif;
+$body-font: "Open Sans", sans-serif;
+
+@mixin tablet {
+  @media screen and (min-width: 576px) and (max-width: 991px) {
+    @content;
+  }
+}
+@mixin tablet-and-up {
+  @media screen and (min-width: 768px) {
+    @content;
+  }
+}
+@mixin laptop {
+  @media screen and (min-width: 992px) and (max-width: 1199px) {
+    @content;
+  }
+}
+@mixin laptop-and-up {
+  @media screen and (min-width: 992px) {
+    @content;
+  }
+}
+@mixin desktop {
+  @media screen and (min-width: 1200px) {
+    @content;
+  }
+}
+
+@import "bootstrap";

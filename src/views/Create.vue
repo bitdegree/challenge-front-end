@@ -1,12 +1,15 @@
 <template>
-  <div class="container">
-    <form class="needs-validation">
-      <div class="d-flex flex-column mb-3">
+  <div v-if="!loading" class="container">
+    <Nav />
+    <form>
+      <div class="d-flex flex-column my-3">
+        <h1 v-if="!edit" class="form-title">New Post</h1>
+        <h1 v-else class="form-title">Edit Post</h1>
         <label for="authorSelect">Author</label>
         <select
           v-model="userId"
           id="authorSelect"
-          class="custom-select mb-3"
+          class="custom-select mb-3 col-12 col-md-5 col-lg-4"
           required
         >
           <option
@@ -35,8 +38,8 @@
           rows="7"
         ></textarea>
         <button
-          type="submit"
-          class="btn btn-primary w-25 mt-2"
+          type="button"
+          class="btn btn-primary mt-4 mx-auto bg-primary"
           @click="onSubmit"
           :disabled="!formValid"
         >
@@ -48,8 +51,10 @@
 </template>
 
 <script>
+import Nav from "@/components/Nav.vue";
 export default {
   name: "Create",
+  components: { Nav },
   props: {
     edit: {
       type: Boolean,
@@ -68,6 +73,9 @@ export default {
     };
   },
   computed: {
+    loading() {
+      return this.$store.getters.loading;
+    },
     authors() {
       return this.$store.getters.authors;
     },
@@ -109,4 +117,8 @@ export default {
 };
 </script>
 
-<style></style>
+<style scoped lang="scss">
+form .btn {
+  width: 150px;
+}
+</style>

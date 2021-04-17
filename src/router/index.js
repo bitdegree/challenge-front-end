@@ -10,11 +10,6 @@ const routes = [
     component: Home,
   },
   {
-    path: "/about",
-    name: "About",
-    component: () => import("../views/About.vue"),
-  },
-  {
     path: "/post/:id",
     name: "Post",
     component: Post,
@@ -28,7 +23,10 @@ const routes = [
     path: "/post/:id/:edit",
     name: "Edit",
     component: Create,
-    props: true,
+    props: ({ params }) => ({
+      id: Number.parseInt(params.id, 10) || 0,
+      edit: params.edit,
+    }),
   },
 ];
 
