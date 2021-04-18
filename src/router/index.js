@@ -1,39 +1,21 @@
 import Vue from "vue";
 import VueRouter from "vue-router";
 import Home from "../views/Home.vue";
+import PostPage from "../views/Post-page.vue";
+import PostCreationPage from "../views/Post-creation-page";
+import PostEditPage from "../views/Post-edit-page";
 
 Vue.use(VueRouter);
 
 const routes = [
-  {
-    path: "/",
-    name: "Home",
-    component: Home,
-  },
-  {
-    path: "/post-page",
-    name: "Post-page",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Post-page.vue"),
-  },
+  { path: "/", name: "Home", component: Home },
+  { path: "/post/:id", name: "Post-page", component: PostPage, props: true },
   {
     path: "/post-creation-page",
     name: "Post-creation-page",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Post-creation-page.vue"),
+    component: PostCreationPage,
   },
-  {
-    path: "/post-creation-page",
-    name: "Post-creation-page",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Post-creation-page.vue"),
-  },
-  {
-    path: "/post-edit-page",
-    name: "Post-edit-page",
-    component: () =>
-      import(/* webpackChunkName: "about" */ "../views/Post-edit-page.vue"),
-  },
+  { path: "/post-edit-page", name: "Post-edit-page", component: PostEditPage },
 ];
 
 const router = new VueRouter({

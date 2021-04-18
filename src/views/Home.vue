@@ -8,9 +8,23 @@
     <ul>
       <li v-for="post in posts" :key="post.id">
         <span>{{ post.userId }}</span>
-        <span>{{ post.id }}</span>
         <span>{{ post.title }}</span>
         <span>{{ post.body }}</span>
+        <button>
+          <router-link
+            :to="{
+              name: 'Post-page',
+              params: {
+                id: post.id,
+                userID: post.userID,
+                title: post.title,
+                body: post.body,
+              },
+            }"
+          >
+            Check post No. {{ post.id }}
+          </router-link>
+        </button>
       </li>
     </ul>
   </div>
@@ -28,16 +42,7 @@ export default {
   data() {
     return {
       showPosts: false,
-      posts: [
-        {
-          post: {
-            userId: "",
-            id: "",
-            title: "",
-            body: "",
-          },
-        },
-      ],
+      posts: [{ post: { userId: "", id: "", title: "", body: "" } }],
     };
   },
   methods: {
