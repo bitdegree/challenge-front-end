@@ -16,7 +16,7 @@
               name: 'Post-page',
               params: {
                 id: post.id,
-                userID: post.userID,
+                userId: post.userId,
                 title: post.title,
                 body: post.body,
               },
@@ -33,6 +33,7 @@
 <script>
 // @ is an alias to /src
 import HelloWorld from "@/components/HelloWorld.vue";
+import axios from "axios";
 
 export default {
   name: "Home",
@@ -42,33 +43,18 @@ export default {
   data() {
     return {
       showPosts: false,
-      posts: [{ post: { userId: "", id: "", title: "", body: "" } }],
+      posts: [],
+      newPost: "",
     };
   },
   methods: {
     getAllBlogPosts() {
-      const jsonPosts = "https://jsonplaceholder.typicode.com/posts";
-      let request = new XMLHttpRequest();
-      request.open("GET", jsonPosts);
-      request.responseType = "json";
-      request.send();
-      request.onload = function () {
-        const posts = request.response;
-        populatePosts(posts);
-      };
-      let that = this;
-      function populatePosts(arr) {
-        for (let n = 0; n < arr.length; n++) {
-          const newGenericPost = {
-            userId: arr[n].userId,
-            id: arr[n].id,
-            title: arr[n].title,
-            body: arr[n].body,
-          };
-          that.posts.push(newGenericPost);
-          that.showPosts = true;
-        }
-      }
+      axios
+        .get("https://jsonplaceholder.typicode.com/posts")
+        .then((response) => {
+          const posts = response.data;
+          this.posts = posts;
+        });
     },
   },
 };
