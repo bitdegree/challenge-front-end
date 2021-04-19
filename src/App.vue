@@ -6,7 +6,9 @@
       <router-link to="/post-creation-page">Post creation page</router-link> |
       <router-link to="/post-edit-page">Post edit page</router-link>
     </div>
-    <router-view />
+    <keep-alive>
+      <router-view />
+    </keep-alive>
   </div>
 </template>
 
