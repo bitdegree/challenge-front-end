@@ -11,6 +11,6 @@
 
 <script>
 export default {
-  props: ["id", "userID", "title", "body"],
+  props: ["id", "userId", "title", "body"],
 };
 </script>
