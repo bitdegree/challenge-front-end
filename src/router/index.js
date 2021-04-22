@@ -15,7 +15,12 @@ const routes = [
     name: "Post-creation-page",
     component: PostCreationPage,
   },
-  { path: "/post-edit-page", name: "Post-edit-page", component: PostEditPage },
+  {
+    path: "/post-edit-page/:id/edit",
+    name: "Post-edit-page",
+    component: PostEditPage,
+    props: true,
+  },
 ];
 
 const router = new VueRouter({
